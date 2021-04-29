@@ -7,8 +7,13 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     this->setWindowTitle(tr("Qt窗体应用"));
-    this->setMaximumSize(300, 300);
-    this->setMinimumSize(300, 300);
+
+    // 方案一
+    // this->setMaximumSize(300, 300);
+    // this->setMinimumSize(300, 300);
+
+    // 方案二
+    this->setFixedSize(300, 300);
 }
 
 MainWindow::~MainWindow()
