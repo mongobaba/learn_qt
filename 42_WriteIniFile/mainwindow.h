@@ -6,7 +6,6 @@
 #include <QLineEdit>
 #include <QMainWindow>
 #include <QPushButton>
-#include <QSettings>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -36,6 +35,5 @@ private:
     QLabel* valueLabel;
     QLineEdit* value;
     QPushButton* button;
-    QSettings* settings;
 };
 #endif // MAINWINDOW_H
