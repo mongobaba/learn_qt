@@ -22,3 +22,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::mouseDoubleClickEvent(QMouseEvent* /*event*/)
+{
+    this->close();
+}

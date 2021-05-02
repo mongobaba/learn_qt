@@ -15,6 +15,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+protected:
+    void mouseDoubleClickEvent(QMouseEvent* event) override;
+
 private:
     Ui::MainWindow *ui;
 };
