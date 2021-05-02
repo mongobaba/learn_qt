@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     // 方案一
     // this->setStyleSheet("background:red");
+    // this->setStyleSheet("background-color:red");
 
     // 方案二
     QPalette palette = this->palette();
