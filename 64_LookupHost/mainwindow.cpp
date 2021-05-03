@@ -29,7 +29,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::sendUrl()
 {
-    QHostInfo::lookupHost(urlLineEdit->text(), this, SLOT(lookup(const QHostInfo&)));
+    // 方式一，传统的信号槽
+    // QHostInfo::lookupHost(urlLineEdit->text(), this, SLOT(lookup(const QHostInfo&)));
+    // 方式二，表面是仿函数，实质还是前一种方式
+    QHostInfo::lookupHost(urlLineEdit->text(), [this](const QHostInfo& info){ lookup(info); });
 }
 
 void MainWindow::lookup(const QHostInfo& info)
