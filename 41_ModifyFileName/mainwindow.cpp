@@ -33,8 +33,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::browseFile()
 {
-    const char* filter = "text file(*.txt);;C file(*.cpp);;All file(*.*)";
-    QString str(QFileDialog::getOpenFileName(this, tr("open file"), "/", filter));
+    QString filter = tr("文本文件(*.txt);;所有文件(*.*)");
+    QString str(QFileDialog::getOpenFileName(this, tr("打开文件"), "/", filter));
     filePath->setText(str);
 }
 
