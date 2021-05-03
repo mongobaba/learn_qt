@@ -25,7 +25,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::editText()
 {
+    // 可以设置多个自定义颜色，win10是16个
     QColorDialog::setCustomColor(0, QRgb(0x0000ff));
+    // 参数为初始选中的颜色
     QColor color = QColorDialog::getColor(QColor(0, 255, 0));
     QPalette palette = label->palette();
     palette.setColor(QPalette::WindowText, color);
