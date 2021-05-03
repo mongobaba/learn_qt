@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     lineEdit = new QLineEdit(this);
     lineEdit->setGeometry(QRect(100, 100, 250, 25));
-    lineEdit->setStyleSheet("border:1px;border-style:solid;color:red;border-color:bluered;");
+    lineEdit->setStyleSheet("border:1px;border-style:solid;color:red;border-color:blue red;");
     lineEdit->setMaxLength(12);
     lineEdit->setEchoMode(QLineEdit::Password);
 }
