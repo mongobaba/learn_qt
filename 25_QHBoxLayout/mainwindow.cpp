@@ -18,6 +18,8 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     widget = new QWidget();
+    // 或者将widget传给layout的构造函数
+    // setLayout会改变parent
     widget->setLayout(layout);
     this->setCentralWidget(widget);
 }
