@@ -8,12 +8,12 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     comboBox = new QFontComboBox(this);
-    comboBox->setGeometry(QRect(50, 50, 120, 25));
+    comboBox->setGeometry(QRect(50, 51, 120, 28));
 
     button = new QPushButton(this);
-    button->setText(tr("按钮"));
+    button->setText(tr("显示名称"));
     button->move(180, 50);
-    connect(button, SIGNAL(released()), this, SLOT(txtButton()));
+    connect(button, SIGNAL(clicked()), this, SLOT(txtButton()));
 
     label = new QLabel(this);
     label->setGeometry(QRect(50, 150, 300, 25));
