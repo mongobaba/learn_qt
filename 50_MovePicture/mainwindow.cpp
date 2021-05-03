@@ -11,10 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     label = new QLabel(this);
     label->setGeometry(QRect(50, 50, 300, 300));
-
-    image = new QImage();
-    image->load(":/new/prefix1/butterfly.png");
-    label->setPixmap(QPixmap::fromImage(*image));
+    label->setPixmap(QPixmap(":/new/prefix1/butterfly.png"));
 
     button = new QPushButton(tr("移动"), this);
     button->setGeometry(QRect(50, 400, 80, 25));
