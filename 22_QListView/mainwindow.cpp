@@ -14,7 +14,8 @@ MainWindow::MainWindow(QWidget *parent)
     list << tr("数学") << tr("语文") << tr("外语") << tr("地理");
 
     // view是与model搭配使用的，注意比较QComboBox与QListView添加内容的差异
-    model = new QStringListModel(list);
+    model = new QStringListModel(list, listView);
+    // setModel并不会自动为model设置parent，所以创建时最好手动指定，以免内存泄漏
     listView->setModel(model);
 }
 
