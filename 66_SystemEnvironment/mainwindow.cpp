@@ -11,9 +11,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     QStringList list = QProcess::systemEnvironment();
-    QStringListModel* model = new QStringListModel(list);
+    QStringListModel* model = new QStringListModel(list, this);
     QListView* view = new QListView(this);
-//    view->setGeometry(QRect(10, 10, 380, 300));
     view->setModel(model);
     setCentralWidget(view);
 }
