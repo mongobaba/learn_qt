@@ -13,21 +13,22 @@ MainWindow::MainWindow(QWidget *parent)
     editMenu = new QMenu(this);
     helpMenu = new QMenu(this);
 
+    // addAction不会更改ownership，所以这里设置parent是必要的
     newAct = new QAction(QIcon(":/new/prefix1/new.png"), tr("新建"), this);
-    newAct->setShortcut(tr("Ctrl+N"));
+    newAct->setShortcut(QString("Ctrl+N"));
     newAct->setStatusTip(tr("新建文件"));
     connect(newAct, SIGNAL(triggered()), this, SLOT(newFile()));
 
     cutAct = new QAction(QIcon(":/new/prefix1/cut.png"), tr("剪切"), this);
-    cutAct->setShortcut(tr("Ctrl+X"));
+    cutAct->setShortcut(QString("Ctrl+X"));
     cutAct->setStatusTip(tr("剪切内容"));
 
     copyAct = new QAction(QIcon(":/new/prefix1/copy.png"), tr("复制"), this);
-    copyAct->setShortcut(tr("Ctrl+C"));
+    copyAct->setShortcut(QString("Ctrl+C"));
     copyAct->setStatusTip(tr("复制内容"));
 
     pasteAct = new QAction(QIcon(":/new/prefix1/paste.png"), tr("粘贴"), this);
-    pasteAct->setShortcut(tr("Ctrl+V"));
+    pasteAct->setShortcut(QString("Ctrl+V"));
     pasteAct->setStatusTip(tr("粘贴内容"));
 
     aboutQtAct = new QAction(tr("关于Qt"), this);
@@ -35,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(aboutQtAct, SIGNAL(triggered()), qApp, SLOT(aboutQt()));
 
     fileMenu = menuBar()->addMenu(tr("文件"));
+    // 不会更改ownership
     fileMenu->addAction(newAct);
 
     editMenu = menuBar()->addMenu(tr("编辑"));
