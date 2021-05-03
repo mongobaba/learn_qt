@@ -10,9 +10,8 @@ MainWindow::MainWindow(QWidget *parent)
     label = new QLabel(this);
     label->setGeometry(QRect(160, 50, 300, 300));
 
-    image = new QImage();
-    image->load(":/new/prefix1/butterfly.png");
-    label->setPixmap(QPixmap::fromImage(*image));
+    image.load(":/new/prefix1/butterfly.png");
+    label->setPixmap(QPixmap::fromImage(image));
 
     hButton = new QPushButton(tr("水平翻转"), this);
     hButton->setGeometry(QRect(50, 400, 80, 25));
@@ -34,20 +33,20 @@ MainWindow::~MainWindow()
 
 void MainWindow::hShow()
 {
-    *image = image->mirrored(true, false);
-    label->setPixmap(QPixmap::fromImage(*image));
+    image = image.mirrored(true, false);
+    label->setPixmap(QPixmap::fromImage(image));
 }
 
 void MainWindow::vShow()
 {
-    *image = image->mirrored(false, true);
-    label->setPixmap(QPixmap::fromImage(*image));
+    image = image.mirrored(false, true);
+    label->setPixmap(QPixmap::fromImage(image));
 }
 
 void MainWindow::angleShow()
 {
     QMatrix matrix;
     matrix.rotate(45);
-    *image = image->transformed(matrix);
-    label->setPixmap(QPixmap::fromImage(*image));
+    image = image.transformed(matrix);
+    label->setPixmap(QPixmap::fromImage(image));
 }
