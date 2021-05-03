@@ -3,6 +3,7 @@
 
 #include <QGraphicsBlurEffect>
 #include <QLabel>
+#include <QPainter>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -24,3 +25,10 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::paintEvent(QPaintEvent* /*e*/)
+{
+    QPainter painter(this);
+    // 从下面两个矩形的位置可以看出：阴影是在label区域之外
+    painter.drawRect(QRect(25, 350, 300, 20));  // x坐标和宽度相同
+    painter.drawRect(QRect(350, 25, 20, 300));  // y坐标和高度相同
+}

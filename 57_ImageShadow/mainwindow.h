@@ -16,6 +16,9 @@ public:
     ~MainWindow();
 
 private:
+    void paintEvent(QPaintEvent* e) override;
+
+private:
     Ui::MainWindow *ui;
 };
 #endif // MAINWINDOW_H
