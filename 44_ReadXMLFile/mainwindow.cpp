@@ -43,13 +43,11 @@ void MainWindow::readNode()
     while (!reader.atEnd())
     {
         reader.readNext();
-        if (reader.isStartElement())
+        // 与上一个示例的结构保持一致
+        if (reader.isStartElement() && reader.name() == "title")
         {
-            if (reader.name() == "title")
-            {
-                label->setText(reader.readElementText());
-                return;
-            }
+            label->setText(reader.readElementText());
+            return;
         }
     }
 
