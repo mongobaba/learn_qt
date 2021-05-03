@@ -26,22 +26,16 @@ MainWindow::~MainWindow()
 
 void MainWindow::createFolder()
 {
-    QDir* dir = new QDir();
-    bool exist = dir->exists(lineEdit->text());
-    if (exist)
+    QDir dir;
+    QString path(lineEdit->text());
+    QString text;
+    if (dir.exists(path))
     {
-        QMessageBox::warning(this, tr("创建文件夹"), tr("文件夹已经存在！"));
+        text = tr("文件夹已经存在");
     }
     else
     {
-        bool ok = dir->mkdir(lineEdit->text());
-        if (ok)
-        {
-            QMessageBox::warning(this, tr("创建文件夹"), tr("文件夹创建成功！"));
-        }
-        else
-        {
-            QMessageBox::warning(this, tr("创建文件夹"), tr("文件夹创建失败！"));
-        }
+        text = dir.mkdir(path) ? tr("文件夹创建成功") : tr("文件夹创建失败");
     }
+    QMessageBox::warning(this, tr("创建文件夹"), text);
 }
