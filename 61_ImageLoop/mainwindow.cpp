@@ -8,10 +8,13 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    QPixmap pixmap(":/new/prefix1/0.png");
+    // 只有两张图片，所以简单逐条加载
+    pixmap[0].load(":/new/prefix1/0.png");
+    pixmap[1].load(":/new/prefix1/1.png");
+
     label = new QLabel(this);
     label->setGeometry(QRect(50, 50, 250, 80));
-    label->setPixmap(pixmap);
+    label->setPixmap(pixmap[0]);
 
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(changeImage()));
@@ -25,7 +28,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::changeImage()
 {
-    QPixmap pixmap(QString::asprintf(":/new/prefix1/%d.png", index & 1));
-    label->setPixmap(pixmap);
-    ++index;
+    index = (index + 1) & 1;
+    label->setPixmap(pixmap[index]);
 }

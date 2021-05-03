@@ -24,6 +24,7 @@ private:
     Ui::MainWindow *ui;
     QLabel* label;
     QTimer* timer;
+    QPixmap pixmap[2];
     int index;
 };
 #endif // MAINWINDOW_H
