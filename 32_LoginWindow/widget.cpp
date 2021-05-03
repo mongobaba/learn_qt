@@ -11,8 +11,8 @@ Widget::Widget(QWidget *parent)
     ui->setupUi(this);
     this->setFixedSize(280, 150);
 
-    userLabel = new QLabel(tr("用户名："), this);
-    pwdLabel = new QLabel(tr("密码："), this);
+    userLabel = new QLabel(tr("用户名："));
+    pwdLabel = new QLabel(tr("密码："));
 
     userLineEdit = new QLineEdit();
     userLineEdit->setMaxLength(12);
