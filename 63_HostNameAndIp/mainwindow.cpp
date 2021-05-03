@@ -16,9 +16,16 @@ MainWindow::MainWindow(QWidget *parent)
     QHostInfo info = QHostInfo::fromName(hostName);
     for (QHostAddress addr : info.addresses())
     {
-        if (addr.protocol() == QAbstractSocket::IPv4Protocol)
+        switch (addr.protocol())
         {
+        case QAbstractSocket::IPv4Protocol:
             qDebug() << "IPV4地址：" << addr.toString();
+            break;
+        case QAbstractSocket::IPv6Protocol:
+            qDebug() << "IPV6地址：" << addr.toString();
+            break;
+        default:
+            break;
         }
     }
 }
