@@ -25,5 +25,6 @@ void MainWindow::paintEvent(QPaintEvent */*e*/)
 
     painter.drawRect(199, 49, 152, 152);
     painter.shear(0.5, 0);
+    // 扭曲之后图片位置偏移了很多，说明下面的调用还是使用原始的坐标系
     painter.drawPixmap(200, 50, 150, 150, pixmap);
 }
