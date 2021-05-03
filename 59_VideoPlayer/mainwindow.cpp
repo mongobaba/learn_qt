@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     widget = new QVideoWidget();
     widget->setStyleSheet("background-color:black");
     // 使用前请确保安装了DirectShow解码器，例如https://github.com/Nevcairiel/LAVFilters/releases
-    player = new QMediaPlayer();
+    player = new QMediaPlayer(this);
     player->setVideoOutput(widget);
     connect(player, SIGNAL(stateChanged(QMediaPlayer::State)), this, SLOT(onStateChanged(QMediaPlayer::State)));
     connect(player, SIGNAL(durationChanged(qint64)), this, SLOT(onDurationChanged(qint64)));
@@ -37,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(slider, SIGNAL(valueChanged(int)), this, SLOT(onSliderValueChanged(int)));
 
     timeLabel = new QLabel();
+    // 频繁变化，所以单独显示
     timeLabel->setText("00:00");
     totalTimeLabel = new QLabel();
     totalTimeLabel->setText(" / 00:00");
@@ -82,20 +83,27 @@ void MainWindow::onStateChanged(QMediaPlayer::State state)
         pauseButton->setText(tr("暂停"));
         pauseButton->disconnect(player);
         connect(pauseButton, SIGNAL(clicked()), player, SLOT(pause()));
+        // 开始播放之后这三个控件才可用
         pauseButton->setEnabled(true);
         stopButton->setEnabled(true);
         slider->setEnabled(true);
         break;
     case QMediaPlayer::State::PausedState:
+        // PausedState只会从PlayingState属性变化而来，而进入暂停时，
+        // pauseButton、stopButton和slider三个控件的状态不会发生变
+        // 化，因此不需要setEnabled
         pauseButton->setText(tr("继续"));
         pauseButton->disconnect(player);
         connect(pauseButton, SIGNAL(clicked()), player, SLOT(play()));
         break;
     case QMediaPlayer::State::StoppedState:
         pauseButton->setText(tr("暂停"));
+        // 一旦停止，这三个控件都无法使用
         pauseButton->setEnabled(false);
         stopButton->setEnabled(false);
         slider->setEnabled(false);
+        // 停止视频后清零总时长
+        totalTimeLabel->setText(" / 00:00");
         break;
     }
 }
@@ -108,11 +116,13 @@ void MainWindow::onDurationChanged(qint64 duration)
     int second = total % 60;
     QString time = QString::asprintf(" / %02d:%02d", minute, second);
     totalTimeLabel->setText(time);
+    // 以秒为单位进行设置，下面要与此保持一致
     slider->setMaximum(total);
 }
 
 void MainWindow::onPositionChanged(qint64 position)
 {
+    // 如果slider被按下，则说明正在拖动进度，那么不更新slider，避免循环设置
     if (!slider->isSliderDown())
     {
         // 单位转换为秒
@@ -134,7 +144,7 @@ void MainWindow::onSliderValueChanged(int value)
 void MainWindow::openFile()
 {
     const QString filter = tr("视频文件(*.mpg *.mpeg *.avi *.wmv *.mp4);;所有文件(*.*)");
-    QString fileName = QFileDialog::getOpenFileName(this, tr("选择文件"), ".", filter);
+    QString fileName = QFileDialog::getOpenFileName(this, tr("选择文件"), "/", filter);
     if (!fileName.isEmpty())
     {
         player->setMedia(QUrl::fromLocalFile(fileName));
