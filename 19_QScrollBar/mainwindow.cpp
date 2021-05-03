@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     spinBox = new QSpinBox(this);
     spinBox->setGeometry(QRect(50, 90, 100, 25));
 
+    // 值不变不会发射信号，所以不会导致无限循环
     connect(scrollBar, SIGNAL(valueChanged(int)), spinBox, SLOT(setValue(int)));
     connect(spinBox, SIGNAL(valueChanged(int)), scrollBar, SLOT(setValue(int)));
 
