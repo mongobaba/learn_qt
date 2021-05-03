@@ -22,6 +22,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::showFiles()
 {
-    QString str = QFileDialog::getOpenFileName(this, tr("打开文件"), "/", "text file(*.txt);;C file(*.cpp);;All file(*.*)");
+    QString filter(tr("文本文件(*.txt);;C/C++文件(*.cpp);;所有文件(*.*)"));
+    // 这里的"/"在Windows系统下会指向磁盘（例如D盘）根目录
+    QString str = QFileDialog::getOpenFileName(this, tr("打开文件"), "/", filter);
     fileName->setText(str);
 }
