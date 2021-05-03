@@ -11,11 +11,12 @@ MainWindow::MainWindow(QWidget *parent)
     label->setGeometry(QRect(50, 50, 100, 25));
 
     lineEdit = new QLineEdit(this);
-    lineEdit->setGeometry(QRect(110, 50, 150, 22));
+    lineEdit->setGeometry(QRect(150, 50, 150, 25));
     connect(lineEdit, SIGNAL(cursorPositionChanged(int, int)), this, SLOT(showTime()));
 
     calendar = new QCalendarWidget(this);
-    calendar->setGeometry(QRect(20, 75, 350, 180));
+    calendar->setGeometry(QRect(20, 80, 350, 180));
+    // 默认隐藏
     calendar->setHidden(true);
     connect(calendar, SIGNAL(clicked(QDate)), this, SLOT(setDate()));
 }
@@ -34,5 +35,6 @@ void MainWindow::setDate()
 {
     QDate date = calendar->selectedDate();
     lineEdit->setText(date.toString("yyyy-MM-dd"));
+    // 选择之后再次隐藏
     calendar->setHidden(true);
 }
