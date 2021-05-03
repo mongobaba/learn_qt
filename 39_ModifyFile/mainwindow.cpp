@@ -33,8 +33,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::browseFile()
 {
-    const char* filter = "text file(*.txt);;C file(*.cpp);;All file(*.*)";
-    QString str(QFileDialog::getOpenFileName(this, tr("open file"), "/", filter));
+    QString filter = tr("文本文件(*.txt);;所有文件(*.*)");
+    QString str(QFileDialog::getOpenFileName(this, tr("打开文件"), "/", filter));
     edit->setText(str);
     if (!str.isEmpty())
     {
@@ -42,6 +42,7 @@ void MainWindow::browseFile()
         if (file.open(QIODevice::ReadOnly | QIODevice::Text))
         {
             QTextStream stream(&file);
+            // 需要与文件编码保持一致，否则可能乱码
             stream.setCodec("UTF-8");
             content->setPlainText(stream.readAll());
         }
