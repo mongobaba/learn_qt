@@ -36,12 +36,18 @@ void MainWindow::createFile()
     {
         QXmlStreamWriter writer(&file);
         writer.setAutoFormatting(true);
-        writer.writeStartDocument();
-        writer.writeStartElement("Root");
-        writer.writeAttribute("href", tr("http://qt.nokia.com/"));
-        writer.writeTextElement("title", tr("Qt Home"));
-        writer.writeEndElement();
-        writer.writeEndDocument();
+        {
+            writer.writeStartDocument();
+            {
+                writer.writeStartElement("Root");
+                {
+                    writer.writeAttribute("href", tr("http://qt.nokia.com/"));
+                    writer.writeTextElement("title", tr("Qt Home"));
+                }
+                writer.writeEndElement();
+            }
+            writer.writeEndDocument();
+        }
         QMessageBox::warning(this, tr("创建XML文件"), tr("创建XML文件成功！"));
     }
 }
