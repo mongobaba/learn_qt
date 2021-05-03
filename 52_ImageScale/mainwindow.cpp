@@ -10,9 +10,8 @@ MainWindow::MainWindow(QWidget *parent)
     label = new QLabel(this);
     label->setGeometry(QRect(160, 50, 300, 300));
 
-    image = new QImage();
-    image->load(":/new/prefix1/butterfly.png");
-    label->setPixmap(QPixmap::fromImage(*image));
+    image.load(":/new/prefix1/butterfly.png");
+    label->setPixmap(QPixmap::fromImage(image));
 
     larger = new QPushButton(tr("放大"), this);
     larger->setGeometry(QRect(50, 400, 80, 25));
@@ -30,14 +29,14 @@ MainWindow::~MainWindow()
 
 void MainWindow::showLarger()
 {
-    QSize size = image->size();
-    *image = image->scaled(2 * size.width(), 2 * size.height(), Qt::IgnoreAspectRatio);
-    label->setPixmap(QPixmap::fromImage(*image));
+    QSize size = image.size();
+    image = image.scaled(2 * size.width(), 2 * size.height(), Qt::IgnoreAspectRatio);
+    label->setPixmap(QPixmap::fromImage(image));
 }
 
 void MainWindow::showSmaller()
 {
-    QSize size = image->size();
-    *image = image->scaled(size.width() / 2, size.height() / 2, Qt::IgnoreAspectRatio);
-    label->setPixmap(QPixmap::fromImage(*image));
+    QSize size = image.size();
+    image = image.scaled(size.width() / 2, size.height() / 2, Qt::IgnoreAspectRatio);
+    label->setPixmap(QPixmap::fromImage(image));
 }
