@@ -31,6 +31,8 @@ MainWindow::~MainWindow()
 bool MainWindow::connectDB()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
+    // setDatabaseName的文档里说Qt会在操作SQLite时自动创建
+    // 不存在的databasee文件，具体生成时机是在下面调用open时
     db.setDatabaseName("test.db");
     return db.open();
 }
